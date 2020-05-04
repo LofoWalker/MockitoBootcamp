@@ -1,15 +1,17 @@
 package com.lofo.learnMockito.todo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.Date;
 
-@Table(name = "Todo")
+@Entity
 public class Todo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue
+    private Integer id;
 
     @Column
     private String task;

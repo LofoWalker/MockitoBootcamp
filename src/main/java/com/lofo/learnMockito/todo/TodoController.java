@@ -12,11 +12,6 @@ public class TodoController {
     @Autowired
     private TodoRepository todoRepository;
 
-    @RequestMapping(path = "/")
-    public @ResponseBody String index() {
-        return "index";
-    }
-
     @PostMapping(path = "/add")
     public @ResponseBody Todo addTodo(@RequestParam String name) {
         Todo todo = new Todo(name, now());
