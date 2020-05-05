@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 import static java.time.LocalDate.now;
 
 @Controller
@@ -20,7 +22,7 @@ public class TodoController {
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Todo> getAllTodo() {
-        return todoRepository.findAll();
+    public @ResponseBody ArrayList<Todo> getAllTodo() {
+        return (ArrayList<Todo>) todoRepository.findAll();
     }
 }

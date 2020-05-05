@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+import static java.time.LocalDate.now;
+
 @Getter
 @Setter
 @Entity
@@ -25,6 +27,11 @@ public class Todo {
     private LocalDate date;
 
     public Todo() {}
+
+    public Todo(String task) {
+        this.task = task;
+        this.date = now();
+    }
 
     public Todo(String task, LocalDate date) {
         this.task = task;
