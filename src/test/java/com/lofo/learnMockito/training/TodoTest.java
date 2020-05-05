@@ -1,13 +1,13 @@
 package com.lofo.learnMockito.training;
 
 /**
- * Dans cette méthode nous allons tester notre objet et plus particulièrement son constructeur.
+ * In this method we will test our object and more particularly its constructor.
  */
 public class TodoTest {
 
     /**
-     * Testez les constructeurs de notre objet.
-     * Dans la réalité, ce genre de test n'a pas réellement de sens cependant, les faire ici vous permettra de progresser.
+     * Test the builders of our object.
+     * In reality, this kind of test does not really make sense, doing them here will allow you to progress.
      **/
     public void should_create_a_todo() {}
 

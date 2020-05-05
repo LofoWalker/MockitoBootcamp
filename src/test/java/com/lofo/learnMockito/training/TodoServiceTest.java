@@ -9,10 +9,8 @@ import com.lofo.learnMockito.todo.TodoService;
  */
 public class TodoServiceTest {
 
-    TodoService todoService = new TodoService();;
-
     /**
-     * On va vérifier ici que notre gestion d'erreur fonctionne correctement
+     * We will check here that our error handling works correctly
      */
     public void should_return_null_when_calling_with_null_parameters() {
     }
@@ -27,7 +25,7 @@ public class TodoServiceTest {
     }
 
     /**
-     * Nos cas d'erreur sont donc tous géré. On peut passer au fonctionnement de la méthode
+     * Our error cases are therefore all handled. We can move on to the method
      */
 
     public void should_return_new_task() {
