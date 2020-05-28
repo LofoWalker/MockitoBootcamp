@@ -3,6 +3,8 @@ package com.lofo.learnMockito.solution;
 import com.lofo.learnMockito.todo.Todo;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static java.time.LocalDate.now;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,7 +28,8 @@ public class TodoTest {
          The assertThat method allows you to verify that a variable has certain characteristics.
          Here we just check that it is not zero.
          **/
-        assertThat(new Todo()).isNotNull();
+        Todo newTodo = new Todo();
+        assertThat(newTodo).isNotNull();
     }
 
     /**
@@ -34,7 +37,10 @@ public class TodoTest {
      */
     @Test
     public void should_create_a_todo_with_name() {
-        assertThat(new Todo("Todo")).isNotNull();
+        Todo newTodo = new Todo("Todo");
+        assertThat(newTodo).isNotNull();
+        assertThat(newTodo.getDate()).isEqualTo(now());
+        assertThat(newTodo.getTask()).isEqualTo("Todo");
     }
 
     /**
@@ -42,6 +48,10 @@ public class TodoTest {
      */
     @Test
     public void should_create_a_todo_with_name_and_date() {
-        assertThat(new Todo("Todo", now())).isNotNull();
+        Todo newTodo = new Todo("Todo", "2020-10-10");
+        assertThat(newTodo).isNotNull();
+        assertThat(newTodo.getDate()).isEqualTo(LocalDate.of(2020, 10, 10));
+        assertThat(newTodo.getTask()).isEqualTo("Todo");
     }
 }
+

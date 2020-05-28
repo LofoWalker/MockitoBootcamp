@@ -1,74 +1,76 @@
 package com.lofo.learnMockito.solution;
 
 import com.lofo.learnMockito.todo.Todo;
+import com.lofo.learnMockito.todo.TodoRepository;
 import com.lofo.learnMockito.todo.TodoService;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 
-import static java.time.LocalDate.now;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
-/**
- * We will now test a Service.
- * Until now, the tests allowed more to explore the possibilities of Mockito, here we will focus more
- * on their real interest.
- */
 public class TodoServiceTest {
 
-    TodoService todoService = new TodoService();
+    @Mock
+    TodoRepository todoRepository;
 
-    /**
-     * We will check here that our error handling works correctly
-     */
-    @Test
-    public void should_return_null_when_calling_with_null() {
-        assertThat(todoService.changeTodo(null, null, null)).isNull();
+    @InjectMocks
+    TodoService todoService;
+
+    Todo todo1;
+    Todo todo2;
+    Todo todo3;
+    Todo todo4;
+
+    ArrayList<Todo> listOfTodo;
+
+    @Before
+    public void setUp() {
+        listOfTodo = new ArrayList<>();
+
+        todo1 = new Todo("Todo1");
+        todo2 = new Todo("Todo2");
+        todo3 = new Todo("Todo3");
+        todo4 = new Todo("Todo4");
+
+        listOfTodo.add(todo1);
+        listOfTodo.add(todo2);
+        listOfTodo.add(todo3);
+        listOfTodo.add(todo4);
+
+
+        initMocks(this);
+
+        when(todoRepository.save(any())).thenReturn(todo1);
+        when(todoRepository.findAll()).thenReturn(listOfTodo);
+        when(todoRepository.findByTask(anyString())).thenReturn(todo1);
+        when(todoRepository.findById(anyInt())).thenReturn(todo1);
     }
 
     @Test
-    public void should_return_null_when_calling_with_null_todo() {
-        assertThat(todoService.changeTodo(null, "", now())).isNull();
+    public void should_return_new_todo() {
+        Todo getTodo = todoService.addTodo(todo1.getTask());
+
+         assertThat(getTodo.getTask()).isEqualTo(todo1.getTask());
     }
 
     @Test
-    public void should_return_null_when_calling_with_null_task() {
-        assertThat(todoService.changeTodo(new Todo(), null, now())).isNull();
+    public void should_return_a_list_of_todo() {
+        ArrayList<Todo> getTodo = todoService.getAllTodo();
+
+        assertThat(getTodo.size()).isEqualTo(4);
     }
 
     @Test
-    public void should_return_null_when_calling_with_null_date() {
-        assertThat(todoService.changeTodo(new Todo(), "", null)).isNull();
-    }
+    public void should_return_a_todo_by_is_name() {
+        Todo getTodo = todoService.getTodoByName("Todo1");
 
-    /**
-     * Our error cases are therefore all handled. We can move on to the method
-     */
-
-    @Test
-    public void should_return_new_task() {
-        Todo toChange = new Todo("Tache 1", now());
-        Todo newTodo = todoService.changeTodo(toChange, "Tache 2", toChange.getDate());
-
-        assertThat(newTodo.getTask()).isEqualTo("Tache 2");
-        assertThat(newTodo.getDate()).isEqualTo(toChange.getDate());
-    }
-
-    @Test
-    public void should_return_new_date() {
-        Todo toChange = new Todo("Tache 1", LocalDate.of(2020, 12, 1));
-        Todo newTodo = todoService.changeTodo(toChange, toChange.getTask(), LocalDate.of(2020, 12, 31));
-
-        assertThat(newTodo.getTask()).isEqualTo(toChange.getTask());
-        assertThat(newTodo.getDate()).isEqualTo(LocalDate.of(2020, 12, 31));
-    }
-
-    @Test
-    public void should_return_new_date_and_new_task() {
-        Todo toChange = new Todo("Tache 1", LocalDate.of(2020, 12, 1));
-        Todo newTodo = todoService.changeTodo(toChange, "Tache 2", LocalDate.of(2020, 12, 31));
-
-        assertThat(newTodo.getTask()).isEqualTo("Tache 2");
-        assertThat(newTodo.getDate()).isEqualTo(LocalDate.of(2020, 12, 31));
+        assertThat(getTodo.getTask()).isEqualTo(todo1.getTask());
     }
 }

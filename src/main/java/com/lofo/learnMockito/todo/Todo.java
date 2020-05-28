@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static java.time.LocalDate.now;
 
@@ -33,8 +34,8 @@ public class Todo {
         this.date = now();
     }
 
-    public Todo(String task, LocalDate date) {
+    public Todo(String task, String date) {
         this.task = task;
-        this.date = date;
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

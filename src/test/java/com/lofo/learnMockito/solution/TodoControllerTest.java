@@ -3,6 +3,7 @@ package com.lofo.learnMockito.solution;
 import com.lofo.learnMockito.todo.Todo;
 import com.lofo.learnMockito.todo.TodoController;
 import com.lofo.learnMockito.todo.TodoRepository;
+import com.lofo.learnMockito.todo.TodoService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -29,7 +30,7 @@ public class TodoControllerTest {
      * no need to go back on this annotation. This is how to use it
      */
     @Mock
-    TodoRepository todoRepository;
+    TodoService todoService;
 
     /**
      * This is not described in the article. Right above, we 'mock' TodoRepository.
@@ -64,11 +65,11 @@ public class TodoControllerTest {
          *
          * Now the save method in todoRepository will always return newTodo if called with an xTodo object
          **/
-        when(todoRepository.save(any(Todo.class))).thenReturn(newTodo);
+        when(todoService.addTodo(any())).thenReturn(newTodo);
 
         /**
          * I let you guess the translation of this line there*/
-        when(todoRepository.findAll()).thenReturn(new ArrayList<Todo>());
+        when(todoService.getAllTodo()).thenReturn(new ArrayList<Todo>());
     }
 
     @Test
