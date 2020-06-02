@@ -2,7 +2,7 @@ package com.lofo.learnMockito.todo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 
 @Service
@@ -29,6 +29,7 @@ public class TodoService {
         return todoRepository.findById(id);
     }
 
+    @Transactional
     public void updateTodoTask(int id, String newTask) {
         todoRepository.updateTodoTask(id, newTask);
     }
