@@ -1,4 +1,4 @@
-package com.lofo.learnMockito.training;
+package com.lofo.learnMockito.unitaire.training;
 
 /**
  * In this method we will test our object and more particularly its constructor.

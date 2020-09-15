@@ -1,8 +1,7 @@
-package com.lofo.learnMockito.solution;
+package com.lofo.learnMockito.unitaire.solution;
 
 import com.lofo.learnMockito.todo.Todo;
 import com.lofo.learnMockito.todo.TodoController;
-import com.lofo.learnMockito.todo.TodoRepository;
 import com.lofo.learnMockito.todo.TodoService;
 import org.junit.Before;
 import org.junit.Test;

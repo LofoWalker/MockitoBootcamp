@@ -1,4 +1,4 @@
-package com.lofo.learnMockito.training;
+package com.lofo.learnMockito.unitaire.training;
 
 /**
  * We will now test a controller.
